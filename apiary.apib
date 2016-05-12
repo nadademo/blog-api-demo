@@ -1,80 +1,75 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
 
-# Blog API Apiary Demo
+# Blog API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Simple API to create authored blog posts. 
 
-## Questions Collection [/questions]
+# Blog Posts [/blog/posts]
 
-### List All Questions [GET]
++ Attributes (Blog Post)
 
-+ Response 200 (application/json)
+## Create a Blog Post [POST]
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
++ Attributes (Blog Post)
 
-### Create a New Question [POST]
++ Response 201
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
++ Request
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+          "title": "Let's try with title only"
         }
 
-+ Response 201 (application/json)
++ Response 400 (application/json)
 
-    + Headers
+## Retrieve a Blog Post [GET /blog/posts/{id}]
 
-            Location: /questions/2
++ Parameters
+    + id: `b5c23fa6-ba19-47eb-8d3c-fae77db1b3c3` (string, required)
 
-    + Body
++ Response 200 (application/json)
+    + Attributes (Blog Post)
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+## Delete a Blog Post [DELETE /blog/posts/{id}]
+
++ Parameters
+    + id: `b5c23fa6-ba19-47eb-8d3c-fae77db1b3c3` (string, required)
+
++ Response 200
+
+# Authors [/blog/authors]
+
++ Attributes (Person)
+
+## Create an Author [POST]
+
++ Attributes (Person)
+
++ Response 201
+
+## Retrieve an Author [GET /blog/authors/{id}]
+
++ Parameters
+    + id: `c4e517b4-74ca-446d-a1df-c254cbb5179d` (string, required)
+
++ Response 200
+    + Attributes (Person)
+
+# Data Structures
+
+## Person (object)
++ id: `c4e517b4-74ca-446d-a1df-c254cbb5179d` (string, required)
++ name: Zaphod (string, optional)
++ surname: Beeblebrox (string, optional)
++ email: zaphod@beeblebrox.space (string, required)
+
+## Blog Post (object)
++ title: How to build good APIs (string, required)
++ content: Start with design and take it from there (string, required)
++ created_date: `2016-05-12` (string, required)
++ author (Person, required)
++ category (Category, optional)
+
+## Category (object)
++ name: API Design (string, required)
++ description: posts on API Design and related (string, optional)
