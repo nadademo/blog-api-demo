@@ -10,17 +10,10 @@ Simple API to create authored blog posts.
 
 ## Create a Blog Post [POST]
 
-+ Attributes (Blog Post)
++ Request (application/json)
+    + Attributes (Blog Post)
 
 + Response 201
-
-+ Request
-
-        {
-          "title": "Let's try with title only"
-        }
-
-+ Response 400 (application/json)
 
 ## Retrieve a Blog Post [GET /blog/posts/{id}]
 
@@ -43,7 +36,8 @@ Simple API to create authored blog posts.
 
 ## Create an Author [POST]
 
-+ Attributes (Person)
++ Request (application/json)
+    + Attributes (Person)
 
 + Response 201
 
